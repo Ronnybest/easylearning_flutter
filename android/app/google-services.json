@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "531112287663",
+    "project_id": "easylearning-9ce77",
+    "storage_bucket": "easylearning-9ce77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531112287663:android:5b9de57718bac075a4635a",
+        "android_client_info": {
+          "package_name": "com.example.easylearning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531112287663-ghp86u7og0iiak29sgkc511vpb80b581.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC20dTfOlI_UhbMhAZkuUqF-C-8rlDMT6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531112287663-ghp86u7og0iiak29sgkc511vpb80b581.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
