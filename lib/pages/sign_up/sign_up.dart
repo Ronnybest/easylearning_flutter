@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../common_widgets.dart';
 import '../sign_in/bloc/sign_in_blocs.dart';
 import '../sign_in/bloc/sign_in_events.dart';
 import '../sign_in/bloc/sign_in_states.dart';
 import '../sign_in/sign_in_controller.dart';
-import '../sign_in/widgets/sign_in_widget.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -27,12 +25,12 @@ class _SignUpState extends State<SignUp> {
         child: SafeArea(
           child: Scaffold(
               backgroundColor: Colors.white,
-              appBar: buildAppBar(),
+              appBar: buildAppBar(text: "Sign Up"),
               body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    buildThirdPartyLogin(context),
+                    //buildThirdPartyLogin(context),
                     Center(
                       child: reusableText("Or use your email account to login"),
                     ),
@@ -44,12 +42,13 @@ class _SignUpState extends State<SignUp> {
                         children: [
                           reusableText("Email"),
                           buildTextField(
-                              "Enter your email address",
-                              TextInputType.emailAddress,
-                              MdiIcons.account,
-                              (value) => context
-                                  .read<SignInBloc>()
-                                  .add(EmailEvent(value))),
+                            "Enter your email address",
+                            TextInputType.emailAddress,
+                            MdiIcons.account,
+                            (value) => context.read<SignInBloc>().add(
+                                  EmailEvent(value),
+                                ),
+                          ),
                           reusableText("Password"),
                           buildTextField(
                               "Enter your password",
