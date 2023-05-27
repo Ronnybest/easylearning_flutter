@@ -155,7 +155,8 @@ Widget forgotPassword() {
   );
 }
 
-Widget buildLoginAndRegButton(String buttonName, void Function()? func) {
+Widget buildLoginAndRegButton(
+    String buttonName, String type, void Function()? func) {
   return GestureDetector(
     onTap: func,
     child: Container(
@@ -163,14 +164,14 @@ Widget buildLoginAndRegButton(String buttonName, void Function()? func) {
       height: 50.h,
       margin: EdgeInsets.only(top: 25.h),
       decoration: BoxDecoration(
-        color: buttonName != "Sign Up"
+        color: type != "Sign Up"
             ? AppColors.primaryElement
             : AppColors.primaryBackground,
         borderRadius: BorderRadius.all(
           Radius.circular(15.w),
         ),
         border: Border.all(
-          color: buttonName == "Sign Up"
+          color: type == "Sign Up"
               ? AppColors.primaryFourElementText
               : Colors.transparent,
         ),
@@ -189,7 +190,7 @@ Widget buildLoginAndRegButton(String buttonName, void Function()? func) {
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.normal,
-            color: buttonName != "Sign Up"
+            color: type != "Sign Up"
                 ? AppColors.primaryBackground
                 : AppColors.primaryText,
           ),

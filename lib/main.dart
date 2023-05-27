@@ -1,6 +1,7 @@
 import 'package:easylearning/app_blocs.dart';
 import 'package:easylearning/app_events.dart';
 import 'package:easylearning/app_state.dart';
+import 'package:easylearning/common/values/colors.dart';
 import 'package:easylearning/pages/bloc_providers.dart';
 import 'package:easylearning/pages/sign_in/sign_in.dart';
 import 'package:easylearning/pages/sign_up/sign_up.dart';
@@ -28,8 +29,10 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           home: const Welcome(),
           theme: ThemeData(
-            appBarTheme:
-                const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
+            appBarTheme: const AppBarTheme(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                iconTheme: IconThemeData(color: AppColors.primaryText)),
           ),
           routes: {
             "myHomePage": (context) => const MyHomePage(title: "test"),
