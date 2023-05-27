@@ -3,7 +3,6 @@ import 'package:easylearning/pages/sign_up/bloc/sign_up_blocs.dart';
 import 'package:easylearning/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../app_blocs.dart';
 
 class AppBlocProviders {
   static get allBlocProviders => [

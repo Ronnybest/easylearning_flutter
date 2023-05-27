@@ -1,4 +1,3 @@
-import 'dart:math';
 
 class SignInState {
   final String email;

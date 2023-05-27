@@ -1,4 +1,5 @@
 import 'package:easylearning/common/values/colors.dart';
+import 'package:easylearning/pages/application/application_page.dart';
 import 'package:easylearning/pages/bloc_providers.dart';
 import 'package:easylearning/pages/sign_in/sign_in.dart';
 import 'package:easylearning/pages/sign_up/sign_up.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: const Welcome(),
+          home: const ApplicationPage(),
           theme: ThemeData(
             appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.white,

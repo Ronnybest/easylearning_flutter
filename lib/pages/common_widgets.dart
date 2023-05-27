@@ -136,7 +136,7 @@ Widget buildTextField(String hintText, TextInputType textType,
 }
 
 Widget forgotPassword() {
-  return Container(
+  return SizedBox(
     width: 260.w,
     height: 44.h,
     child: GestureDetector(
