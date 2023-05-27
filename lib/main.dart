@@ -1,6 +1,3 @@
-import 'package:easylearning/app_blocs.dart';
-import 'package:easylearning/app_events.dart';
-import 'package:easylearning/app_state.dart';
 import 'package:easylearning/common/values/colors.dart';
 import 'package:easylearning/pages/bloc_providers.dart';
 import 'package:easylearning/pages/sign_in/sign_in.dart';
@@ -35,61 +32,10 @@ class MyApp extends StatelessWidget {
                 iconTheme: IconThemeData(color: AppColors.primaryText)),
           ),
           routes: {
-            "myHomePage": (context) => const MyHomePage(title: "test"),
             "signIn": (context) => const SignIn(),
             "signUp": (context) => const SignUp(),
           },
         ),
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(child: BlocBuilder<AppBlocs, AppStates>(
-        builder: (context, state) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                "${BlocProvider.of<AppBlocs>(context).state.counter}",
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ],
-          );
-        },
-      )),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          FloatingActionButton(
-            heroTag: "Plus",
-            onPressed: () =>
-                BlocProvider.of<AppBlocs>(context).add(Increment()),
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-          FloatingActionButton(
-            heroTag: "Minus",
-            onPressed: () =>
-                BlocProvider.of<AppBlocs>(context).add(Decrement()),
-            tooltip: 'Decrement',
-            child: const Icon(Icons.remove),
-          ),
-        ],
       ),
     );
   }

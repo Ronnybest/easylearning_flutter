@@ -1,12 +1,13 @@
+import 'package:easylearning/pages/sign_up/bloc/sign_up_blocs.dart';
+import 'package:easylearning/pages/sign_up/bloc/sign_up_events.dart';
+import 'package:easylearning/pages/sign_up/bloc/sign_up_states.dart';
+import 'package:easylearning/pages/sign_up/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 // !REGISTRATION
 import '../common_widgets.dart';
-import '../sign_in/bloc/sign_in_blocs.dart';
-import '../sign_in/bloc/sign_in_events.dart';
-import '../sign_in/bloc/sign_in_states.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -18,7 +19,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignInBloc, SignInState>(
+    return BlocBuilder<SignUpBlocs, SignUpStates>(
       builder: (context, state) => Container(
         color: Colors.white,
         child: SafeArea(
@@ -47,8 +48,8 @@ class _SignUpState extends State<SignUp> {
                             "Enter your username",
                             TextInputType.name,
                             MdiIcons.account,
-                            (value) => context.read<SignInBloc>().add(
-                                  EmailEvent(value),
+                            (value) => context.read<SignUpBlocs>().add(
+                                  UserNameEvent(value),
                                 ),
                           ),
                           reusableText("Email"),
@@ -56,7 +57,7 @@ class _SignUpState extends State<SignUp> {
                             "Enter your email address",
                             TextInputType.emailAddress,
                             MdiIcons.email,
-                            (value) => context.read<SignInBloc>().add(
+                            (value) => context.read<SignUpBlocs>().add(
                                   EmailEvent(value),
                                 ),
                           ),
@@ -65,7 +66,7 @@ class _SignUpState extends State<SignUp> {
                             "Enter your password",
                             TextInputType.visiblePassword,
                             MdiIcons.lock,
-                            (value) => context.read<SignInBloc>().add(
+                            (value) => context.read<SignUpBlocs>().add(
                                   PasswordEvent(value),
                                 ),
                           ),
@@ -74,15 +75,17 @@ class _SignUpState extends State<SignUp> {
                             "Confirm",
                             TextInputType.visiblePassword,
                             MdiIcons.lock,
-                            (value) => context.read<SignInBloc>().add(
-                                  PasswordEvent(value),
+                            (value) => context.read<SignUpBlocs>().add(
+                                  RePasswordEvent(value),
                                 ),
                           ),
                           buildLoginAndRegButton(
                             "Sign Up",
                             "Sign In",
                             () {
-                              Navigator.of(context).pushNamed("signUp");
+                              //Navigator.of(context).pushNamed("signUp");
+                              SignUpController(context: context)
+                                  .handleEmailRegister();
                             },
                           ),
                         ],
