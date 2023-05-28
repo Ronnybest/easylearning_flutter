@@ -19,7 +19,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignInBloc, SignInState>(
+    return BlocBuilder<SignInBlocs, SignInState>(
       builder: (context, state) => Container(
         color: Colors.white,
         child: SafeArea(
@@ -46,7 +46,7 @@ class _SignInState extends State<SignIn> {
                             TextInputType.emailAddress,
                             MdiIcons.account,
                             (value) => context
-                                .read<SignInBloc>()
+                                .read<SignInBlocs>()
                                 .add(EmailEvent(value))),
                         reusableText("Password"),
                         buildTextField(
@@ -54,7 +54,7 @@ class _SignInState extends State<SignIn> {
                             TextInputType.visiblePassword,
                             MdiIcons.lock,
                             (value) => context
-                                .read<SignInBloc>()
+                                .read<SignInBlocs>()
                                 .add(PasswordEvent(value))),
                         forgotPassword(),
                         buildLoginAndRegButton(
@@ -69,7 +69,7 @@ class _SignInState extends State<SignIn> {
                           "Sign Up",
                           "Sign Up",
                           () {
-                            Navigator.of(context).pushNamed("signUp");
+                            Navigator.of(context).pushNamed("/sign_up");
                           },
                         ),
                       ],

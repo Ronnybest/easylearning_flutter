@@ -1,9 +1,5 @@
+import 'package:easylearning/common/routes/routes.dart';
 import 'package:easylearning/common/values/colors.dart';
-import 'package:easylearning/pages/application/application_page.dart';
-import 'package:easylearning/pages/bloc_providers.dart';
-import 'package:easylearning/pages/sign_in/sign_in.dart';
-import 'package:easylearning/pages/sign_up/sign_up.dart';
-import 'package:easylearning/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,21 +17,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: AppBlocProviders.allBlocProviders,
+      providers: [...AppPages.allBlocProviders(context)],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: const ApplicationPage(),
+          onGenerateRoute: AppPages.GenerateRouteSettings,
           theme: ThemeData(
             appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.white,
                 elevation: 0,
                 iconTheme: IconThemeData(color: AppColors.primaryText)),
           ),
-          routes: {
-            "signIn": (context) => const SignIn(),
-            "signUp": (context) => const SignUp(),
-          },
         ),
       ),
     );

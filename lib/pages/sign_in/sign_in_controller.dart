@@ -12,7 +12,7 @@ class SignInController {
     try {
       if (type == "email") {
         //BlocProvider.of<SignInBloc>(context).state;
-        final state = context.read<SignInBloc>().state;
+        final state = context.read<SignInBlocs>().state;
         String emailAddress = state.email;
         String password = state.password;
         if (emailAddress.isEmpty) {
@@ -46,6 +46,8 @@ class SignInController {
 
           if (user != null) {
             print("User exist");
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil("/application", (route) => false);
             // we got verified user from firebase
           } else {
             print("No user");
