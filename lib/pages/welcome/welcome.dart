@@ -1,4 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:easylearning/common/values/constants.dart';
+import 'package:easylearning/global.dart';
 import 'package:easylearning/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:easylearning/pages/welcome/bloc/welcome_events.dart';
 import 'package:easylearning/pages/welcome/bloc/welcome_states.dart';
@@ -128,7 +130,7 @@ class _WelcomeState extends State<Welcome> {
         ),
         //! Button box
         GestureDetector(
-          onTap: () {
+          onTap: () async {
             if (index < 3) {
               //animation
               _controller.animateToPage(
@@ -137,11 +139,10 @@ class _WelcomeState extends State<Welcome> {
                 curve: Curves.easeInOut,
               );
             } else {
-              // Navigator.of(context).push(
-              //   CupertinoPageRoute(
-              //     builder: (context) => MyHomePage(title: "Test"),
-              //   ),
-              // );
+              Global.storageService.setBoolToKey(
+                  AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
+              //print(
+              //    "Value is ${await Global.storageService.getBoolFromKey(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME)}");
               Navigator.of(context)
                   .pushNamedAndRemoveUntil("/sign_in", (route) => false);
             }

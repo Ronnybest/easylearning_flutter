@@ -1,4 +1,6 @@
+import 'package:easylearning/common/values/constants.dart';
 import 'package:easylearning/common/widgets/widget_toast.dart';
+import 'package:easylearning/global.dart';
 import 'package:easylearning/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -33,19 +35,21 @@ class SignInController {
                   email: emailAddress, password: password);
           if (credential.user == null) {
             //!
-            print("User doesnt exist");
+            //print("User doesnt exist");
             return;
           }
           if (!credential.user!.emailVerified) {
             //!
-            print("Email havent verified yet");
+            //print("Email havent verified yet");
             return;
           }
 
           var user = credential.user;
 
           if (user != null) {
-            print("User exist");
+            //print("User exist");
+            Global.storageService
+                .setStringToKey(AppConstants.STORAGE_USER_TOKEN, '123123');
             Navigator.of(context)
                 .pushNamedAndRemoveUntil("/application", (route) => false);
             // we got verified user from firebase

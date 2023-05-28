@@ -1,4 +1,6 @@
 import 'package:easylearning/common/routes/names.dart';
+import 'package:easylearning/common/values/constants.dart';
+import 'package:easylearning/global.dart';
 import 'package:easylearning/pages/application/application_page.dart';
 import 'package:easylearning/pages/application/bloc/app_blocs.dart';
 import 'package:easylearning/pages/sign_in/bloc/sign_in_blocs.dart';
@@ -53,7 +55,20 @@ class AppPages {
       //check for route name matching when navigator gets triggered
       var result = Routes().where((element) => element.route == settings.name);
       if (result.isNotEmpty) {
-        //print("Valid route ${settings.name}");
+        bool deviceFirstOpen = Global.storageService
+            .getBoolFromKey(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME);
+
+        if (result.first.route == AppRoutes.INITIAL && deviceFirstOpen) {
+          String isLogged = Global.storageService
+              .getStringFromKey(AppConstants.STORAGE_USER_TOKEN);
+          if (isLogged.isNotEmpty) {
+            return MaterialPageRoute(
+                builder: (_) => const ApplicationPage(), settings: settings);
+          }
+          return MaterialPageRoute(
+              builder: (_) => const SignIn(), settings: settings);
+        }
+
         return MaterialPageRoute(
             builder: (_) => result.first.page, settings: settings);
       }
