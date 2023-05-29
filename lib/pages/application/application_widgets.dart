@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:easylearning/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,7 +8,7 @@ import '../../common/values/colors.dart';
 
 Widget buildPage(int index) {
   List<Widget> _widgets = [
-    Center(child: Text("Hello")),
+    const HomePage(),
     Center(child: Text("Search")),
     Center(child: Text("Courses")),
     Center(child: Text("Chat")),
