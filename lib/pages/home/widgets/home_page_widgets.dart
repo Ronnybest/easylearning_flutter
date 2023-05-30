@@ -1,5 +1,10 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:easylearning/common/values/colors.dart';
+import 'package:easylearning/pages/home/bloc/home_bloc.dart';
+import 'package:easylearning/pages/home/bloc/home_events.dart';
+import 'package:easylearning/pages/home/bloc/home_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 AppBar buildAppBar() {
@@ -46,7 +51,7 @@ Widget buildText(
   );
 }
 
-Widget buildSearchView() {
+Widget searchView() {
   return Container(
     child: Row(children: [
       Container(
@@ -127,5 +132,56 @@ Widget buildSearchView() {
         ),
       ),
     ]),
+  );
+}
+
+// widget for sliders
+Widget slidersView(BuildContext context, HomeStates state) {
+  List<String> itemsPath = [
+    "assets/icons/Art.png",
+    "assets/icons/Image(1).png",
+    "assets/icons/Image(2).png"
+  ];
+  return Column(
+    children: [
+      Container(
+        margin: EdgeInsets.only(top: 20.h),
+        width: 325.w,
+        height: 160.h,
+        child: PageView.builder(
+          onPageChanged: (value) {
+            context.read<HomeBlocs>().add(HomeDots(value));
+          },
+          itemCount: itemsPath.length,
+          itemBuilder: (context, index) => Container(
+            margin: EdgeInsets.only(left: 5.w),
+            width: 325.w,
+            height: 160.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20.h)),
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(itemsPath[index]),
+              ),
+            ),
+          ),
+        ),
+      ),
+      Container(
+        child: DotsIndicator(
+          dotsCount: itemsPath.length,
+          position: state.index.toDouble(),
+          decorator: DotsDecorator(
+            color: AppColors.primaryThreeElementText,
+            activeColor: AppColors.primaryElement,
+            size: const Size.square(5),
+            activeSize: const Size(17, 5),
+            activeShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+          ),
+        ),
+      ),
+    ],
   );
 }

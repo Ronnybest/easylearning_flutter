@@ -3,6 +3,8 @@ import 'package:easylearning/common/values/constants.dart';
 import 'package:easylearning/global.dart';
 import 'package:easylearning/pages/application/application_page.dart';
 import 'package:easylearning/pages/application/bloc/app_blocs.dart';
+import 'package:easylearning/pages/home/bloc/home_bloc.dart';
+import 'package:easylearning/pages/home/home_page.dart';
 import 'package:easylearning/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:easylearning/pages/sign_in/sign_in.dart';
 import 'package:easylearning/pages/sign_up/bloc/sign_up_blocs.dart';
@@ -35,6 +37,11 @@ class AppPages {
         route: AppRoutes.APPLICATION,
         page: const ApplicationPage(),
         bloc: BlocProvider(create: (_) => AppBlocs()),
+      ),
+      PageEntity(
+        route: AppRoutes.HOME_PAGE,
+        page: const HomePage(),
+        bloc: BlocProvider(create: (_) => HomeBlocs()),
       ),
     ];
   }

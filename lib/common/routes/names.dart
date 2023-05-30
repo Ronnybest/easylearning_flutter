@@ -10,4 +10,7 @@ class AppRoutes {
 
   //*sign up page
   static const SIGN_UP = "/sign_up";
+
+  //*home page
+  static const HOME_PAGE = "/home_page";
 }
