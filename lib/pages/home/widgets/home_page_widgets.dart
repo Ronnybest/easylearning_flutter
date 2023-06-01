@@ -53,85 +53,91 @@ Widget buildText(
 
 Widget searchView() {
   return Container(
-    child: Row(children: [
-      Container(
-        width: 280.w,
-        height: 40.h,
-        decoration: BoxDecoration(
-          color: AppColors.primaryBackground,
-          borderRadius: BorderRadius.circular(15.h),
-          border: Border.all(color: AppColors.primaryFourElementText),
-        ),
-        child: Row(
-          children: [
-            Container(
-              margin: EdgeInsets.only(left: 15.h),
-              width: 16.w,
-              height: 16.w,
-              child: Image.asset("assets/icons/search.png"),
+    child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Container(
+            width: 280.w,
+            height: 40.h,
+            decoration: BoxDecoration(
+              color: AppColors.primaryBackground,
+              borderRadius: BorderRadius.circular(15.h),
+              border: Border.all(color: AppColors.primaryFourElementText),
             ),
-            Container(
-              width: 245.w,
-              height: 35.h,
-              //color: Colors.red.withOpacity(.5),
-              child: TextField(
-                //textAlignVertical: TextAlignVertical.bottom,
-                keyboardType: TextInputType.multiline,
-                autocorrect: false,
-                obscureText: false,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(10, 5, 0, 5),
-                  hintText: "search courses...",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
+            child: Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 15.h),
+                  width: 16.w,
+                  height: 16.w,
+                  child: Image.asset("assets/icons/search.png"),
+                ),
+                Container(
+                  width: 245.w,
+                  height: 35.h,
+                  //color: Colors.red.withOpacity(.5),
+                  child: TextField(
+                    //textAlignVertical: TextAlignVertical.bottom,
+                    keyboardType: TextInputType.multiline,
+                    autocorrect: false,
+                    obscureText: false,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(10, 5, 0, 5),
+                      hintText: "search courses...",
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                      hintStyle: TextStyle(
+                        color: AppColors.primarySecondaryElementText,
+                      ),
                     ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
+                    style: TextStyle(
+                      color: AppColors.primaryText,
+                      fontFamily: "Avenir",
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14.sp,
                     ),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  hintStyle: TextStyle(
-                    color: AppColors.primarySecondaryElementText,
                   ),
                 ),
-                style: TextStyle(
-                  color: AppColors.primaryText,
-                  fontFamily: "Avenir",
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14.sp,
+              ],
+            ),
+          ),
+          GestureDetector(
+            child: Container(
+              width: 40.w,
+              height: 40.h,
+              decoration: BoxDecoration(
+                color: AppColors.primary_bg,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(13.w),
                 ),
+                border: Border.all(color: AppColors.primary_bg),
+              ),
+              child: Image.asset(
+                "assets/icons/options.png",
+                scale: 2.5,
               ),
             ),
-          ],
-        ),
-      ),
-      GestureDetector(
-        child: Container(
-          width: 40.w,
-          height: 40.h,
-          decoration: BoxDecoration(
-            color: AppColors.primaryElement,
-            borderRadius: BorderRadius.all(
-              Radius.circular(13.w),
-            ),
-            border: Border.all(color: AppColors.primaryElement),
           ),
-          child: Image.asset("assets/icons/options.png"),
-        ),
-      ),
-    ]),
+        ]),
   );
 }
 
@@ -153,6 +159,7 @@ Widget slidersView(BuildContext context, HomeStates state) {
             context.read<HomeBlocs>().add(HomeDots(value));
           },
           itemCount: itemsPath.length,
+          controller: PageController(initialPage: state.index),
           itemBuilder: (context, index) => Container(
             margin: EdgeInsets.only(left: 5.w),
             width: 325.w,
@@ -180,6 +187,108 @@ Widget slidersView(BuildContext context, HomeStates state) {
               borderRadius: BorderRadius.circular(5),
             ),
           ),
+        ),
+      ),
+    ],
+  );
+}
+
+//menu view to show items
+Widget menuView() {
+  return Column(
+    children: [
+      Container(
+        width: 325.w,
+        margin: EdgeInsets.only(top: 25.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            _reusableTitleSubText(
+                "Choose your courses", AppColors.primaryText, 16),
+            GestureDetector(
+              child: _reusableTitleSubText(
+                  "See all", AppColors.primaryThreeElementText, 12),
+            ),
+          ],
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.only(top: 15.w),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _reusableTabText("All"),
+            _reusableTabText("Popular",
+                bgColor: Colors.transparent,
+                textColor: AppColors.primaryThreeElementText),
+            _reusableTabText("New",
+                bgColor: Colors.transparent,
+                textColor: AppColors.primaryThreeElementText),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _reusableTitleSubText(String text, Color color, int fontSize,
+    {FontWeight fontWeight = FontWeight.bold}) {
+  return Container(
+    child: Text(
+      text,
+      style: TextStyle(
+          color: color, fontWeight: fontWeight, fontSize: fontSize.sp),
+    ),
+  );
+}
+
+Widget _reusableTabText(String tabText,
+    {Color bgColor = AppColors.primaryElement,
+    Color textColor = AppColors.primaryElementText}) {
+  return Container(
+    margin: EdgeInsets.only(right: 20.w),
+    decoration: BoxDecoration(
+      color: bgColor,
+      borderRadius: BorderRadius.circular(7.w),
+      border: Border.all(color: bgColor),
+    ),
+    padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 5.h, bottom: 5.h),
+    child: _reusableTitleSubText(tabText, textColor, 14,
+        fontWeight: FontWeight.normal),
+  );
+}
+
+//course grid view UI
+Widget courseGrid() {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.end,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        "Best for IT and Engineering",
+        maxLines: 1,
+        overflow: TextOverflow.fade,
+        textAlign: TextAlign.left,
+        softWrap: false,
+        style: TextStyle(
+            color: AppColors.primaryElementText,
+            fontWeight: FontWeight.bold,
+            fontSize: 11.sp),
+      ),
+      SizedBox(
+        height: 5.h,
+      ),
+      Text(
+        "Flutter best course",
+        maxLines: 1,
+        overflow: TextOverflow.fade,
+        textAlign: TextAlign.left,
+        softWrap: false,
+        style: TextStyle(
+          color: AppColors.primaryFourElementText,
+          fontWeight: FontWeight.normal,
+          fontSize: 8.sp,
         ),
       ),
     ],
