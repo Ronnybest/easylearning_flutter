@@ -24,4 +24,8 @@ class StorageService {
     String result = _prefs.getString(key) ?? '';
     return result;
   }
+
+  Future<bool> removeFromKey(String key) {
+    return _prefs.remove(key);
+  }
 }

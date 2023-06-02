@@ -23,6 +23,17 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 profileAndEditIcon(),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 25.w),
+                  child: Container(
+                    height: 500.h,
+                    child: buildItemsListView(context),
+                    //color: Colors.red,
+                  ),
+                ),
               ],
             ),
           ),

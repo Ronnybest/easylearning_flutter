@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: AppPages.GenerateRouteSettings,
           theme: ThemeData(
+            useMaterial3: true,
             appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.white,
                 elevation: 0,

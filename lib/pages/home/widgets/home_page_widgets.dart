@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../common/widgets/based_text_widget.dart';
+
 AppBar buildAppBar() {
   return AppBar(
     title: Container(
@@ -204,11 +206,12 @@ Widget menuView() {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _reusableTitleSubText(
-                "Choose your courses", AppColors.primaryText, 16),
+            reusableMainText("Choose your courses"),
             GestureDetector(
-              child: _reusableTitleSubText(
-                  "See all", AppColors.primaryThreeElementText, 12),
+              child: reusableMainText("See all",
+                  fontWeight: FontWeight.normal,
+                  fontSize: 13,
+                  color: AppColors.primaryThreeElementText),
             ),
           ],
         ),
@@ -232,17 +235,6 @@ Widget menuView() {
   );
 }
 
-Widget _reusableTitleSubText(String text, Color color, int fontSize,
-    {FontWeight fontWeight = FontWeight.bold}) {
-  return Container(
-    child: Text(
-      text,
-      style: TextStyle(
-          color: color, fontWeight: fontWeight, fontSize: fontSize.sp),
-    ),
-  );
-}
-
 Widget _reusableTabText(String tabText,
     {Color bgColor = AppColors.primaryElement,
     Color textColor = AppColors.primaryElementText}) {
@@ -254,8 +246,8 @@ Widget _reusableTabText(String tabText,
       border: Border.all(color: bgColor),
     ),
     padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 5.h, bottom: 5.h),
-    child: _reusableTitleSubText(tabText, textColor, 14,
-        fontWeight: FontWeight.normal),
+    child: reusableMainText(tabText,
+        color: textColor, fontSize: 14, fontWeight: FontWeight.normal),
   );
 }
 
