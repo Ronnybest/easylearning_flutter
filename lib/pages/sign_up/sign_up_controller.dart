@@ -43,6 +43,8 @@ class SignUpController {
         await credential.user?.sendEmailVerification();
         String photoUrl = "${AppConstants.SERVER_API_URL}uploads/default.png";
         await credential.user?.updateDisplayName(userName);
+        print("photo url is $photoUrl");
+        await credential.user?.updatePhotoURL(photoUrl);
         toastInfo(
             msg:
                 "Verify your account by link in message  which sent to your email");

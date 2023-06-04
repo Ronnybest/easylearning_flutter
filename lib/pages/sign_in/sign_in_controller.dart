@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:easylearning/common/entities/entities.dart';
+import 'package:easylearning/common/values/constants.dart';
 import 'package:easylearning/common/widgets/widget_toast.dart';
+import 'package:easylearning/global.dart';
 import 'package:easylearning/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../common/apis/user_api.dart';
 
@@ -53,6 +58,8 @@ class SignInController {
             String? email = user.email;
             String? id = user.uid;
             String? photoUrl = user.photoURL;
+            print(
+                "PHOTO URL $photoUrl , email $email , id $id , display name $displayName ");
             LoginRequestEntity loginRequestEntity = LoginRequestEntity(
               avatar: photoUrl,
               name: displayName,
@@ -62,10 +69,7 @@ class SignInController {
             );
             asycnPostAllData(loginRequestEntity);
             //print("User exist");
-            // Global.storageService
-            //     .setStringToKey(AppConstants.STORAGE_USER_TOKEN, '123123');
-            // Navigator.of(context)
-            //     .pushNamedAndRemoveUntil("/application", (route) => false);
+
             // we got verified user from firebase
           } else {
             print("No user");
@@ -92,5 +96,23 @@ class SignInController {
       dismissOnTap: true,
     );
     var result = await UserAPI.login(params: loginRequestEntity);
+    if (result.code == 200) {
+      try {
+        Global.storageService.setStringToKey(
+            AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data!));
+        Global.storageService.setStringToKey(
+            AppConstants.STORAGE_USER_TOKEN, result.data!.access_token!);
+        // print(
+        //     "${AppConstants.STORAGE_USER_PROFILE_KEY} \n ${AppConstants.STORAGE_USER_TOKEN}");
+        EasyLoading.dismiss();
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil("/application", (route) => false);
+      } catch (e) {
+        print("Saving to local storage error ${e.toString()}");
+      }
+    } else {
+      EasyLoading.dismiss();
+      toastInfo(msg: "Error during login");
+    }
   }
 }
