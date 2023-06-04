@@ -30,12 +30,14 @@ environment:
 dependencies:
   cloud_firestore: ^4.5.2
   cupertino_icons: ^1.0.2
+  dio: ^5.1.2
   dots_indicator: ^2.1.0
   firebase_auth: ^4.2.2
   firebase_core: ^2.10.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
+  flutter_easyloading: ^3.0.5
   flutter_isolate: ^2.0.4
   flutter_screenutil: ^5.8.2
   flutter_svg: ^2.0.5
