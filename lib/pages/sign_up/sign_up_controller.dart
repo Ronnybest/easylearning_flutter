@@ -3,7 +3,6 @@ import 'package:easylearning/pages/sign_up/bloc/sign_up_blocs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:easylearning/common/values/constants.dart';
 
 class SignUpController {
   final BuildContext context;
@@ -41,9 +40,9 @@ class SignUpController {
       );
       if (credential.user != null) {
         await credential.user?.sendEmailVerification();
-        String photoUrl = "${AppConstants.SERVER_API_URL}uploads/default.png";
+        String photoUrl = "uploads/default.png";
         await credential.user?.updateDisplayName(userName);
-        print("photo url is $photoUrl");
+        //print("photo url is $photoUrl");
         await credential.user?.updatePhotoURL(photoUrl);
         toastInfo(
             msg:

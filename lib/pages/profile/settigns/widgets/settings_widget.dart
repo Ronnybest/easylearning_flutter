@@ -23,6 +23,7 @@ AppBar buildAppBar() {
 void removeUserData(BuildContext context) {
   context.read<AppBlocs>().add(const TriggerAppEvent(0));
   Global.storageService.removeFromKey(AppConstants.STORAGE_USER_TOKEN);
+  Global.storageService.removeFromKey(AppConstants.STORAGE_USER_PROFILE_KEY);
   Navigator.of(context)
       .pushNamedAndRemoveUntil(AppRoutes.SIGN_IN, (route) => false);
 }

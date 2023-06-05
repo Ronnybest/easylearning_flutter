@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../common/values/constants.dart';
 import '../../../common/widgets/based_text_widget.dart';
 
-AppBar buildAppBar() {
+AppBar buildAppBar(String avatar) {
   return AppBar(
     title: Container(
       margin: EdgeInsets.only(left: 7.w, right: 7.w),
@@ -25,9 +26,9 @@ AppBar buildAppBar() {
             child: Container(
               width: 40.w,
               height: 40.h,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   image: DecorationImage(
-                image: AssetImage("assets/icons/person.png"),
+                image: NetworkImage("${AppConstants.SERVER_API_URL}$avatar"),
               )),
             ),
           ),
