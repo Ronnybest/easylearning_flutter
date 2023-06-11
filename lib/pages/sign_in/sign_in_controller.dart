@@ -99,10 +99,10 @@ class SignInController {
       try {
         Global.storageService.setStringToKey(
             AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data!));
+        // used for auth that's why we save it
         Global.storageService.setStringToKey(
             AppConstants.STORAGE_USER_TOKEN, result.data!.access_token!);
-        // print(
-        //     "${AppConstants.STORAGE_USER_PROFILE_KEY} \n ${AppConstants.STORAGE_USER_TOKEN}");
+        print(result!.data!.access_token!);
         EasyLoading.dismiss();
         Navigator.of(context)
             .pushNamedAndRemoveUntil("/application", (route) => false);
