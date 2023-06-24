@@ -6,7 +6,7 @@ class CourseAPI {
     var response = await HttpUtil().post(
       'api/courseList',
     );
-    print(response.toString());
+    //print(response.toString());
     return CourseListResponseEntity.fromJson(response);
   }
 }

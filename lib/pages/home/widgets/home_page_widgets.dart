@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:easylearning/common/entities/course.dart';
 import 'package:easylearning/common/values/colors.dart';
 import 'package:easylearning/pages/home/bloc/home_bloc.dart';
 import 'package:easylearning/pages/home/bloc/home_events.dart';
@@ -253,37 +255,48 @@ Widget _reusableTabText(String tabText,
 }
 
 //course grid view UI
-Widget courseGrid() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.end,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        "Best for IT and Engineering",
-        maxLines: 1,
-        overflow: TextOverflow.fade,
-        textAlign: TextAlign.left,
-        softWrap: false,
-        style: TextStyle(
-            color: AppColors.primaryElementText,
-            fontWeight: FontWeight.bold,
-            fontSize: 11.sp),
+Widget courseGrid(CourseItem item) { 
+  return Container(
+    padding: EdgeInsets.all(12.w),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(15.w),
+      image: DecorationImage(
+        fit: BoxFit.fill,
+        image: CachedNetworkImageProvider(
+            AppConstants.SERVER_UPLOADS + item.thumbnail!),
       ),
-      SizedBox(
-        height: 5.h,
-      ),
-      Text(
-        "Flutter best course",
-        maxLines: 1,
-        overflow: TextOverflow.fade,
-        textAlign: TextAlign.left,
-        softWrap: false,
-        style: TextStyle(
-          color: AppColors.primaryFourElementText,
-          fontWeight: FontWeight.normal,
-          fontSize: 8.sp,
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          item.course_name ?? "",
+          maxLines: 1,
+          overflow: TextOverflow.fade,
+          textAlign: TextAlign.left,
+          softWrap: false,
+          style: TextStyle(
+              color: AppColors.primaryElementText,
+              fontWeight: FontWeight.bold,
+              fontSize: 11.sp),
         ),
-      ),
-    ],
+        SizedBox(
+          height: 5.h,
+        ),
+        Text(
+          item.description ?? "",
+          maxLines: 1,
+          overflow: TextOverflow.fade,
+          textAlign: TextAlign.left,
+          softWrap: false,
+          style: TextStyle(
+            color: AppColors.primaryFourElementText,
+            fontWeight: FontWeight.normal,
+            fontSize: 8.sp,
+          ),
+        ),
+      ],
+    ),
   );
 }

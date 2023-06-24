@@ -1,5 +1,8 @@
 import 'package:easylearning/pages/application/bloc/app_blocs.dart';
 import 'package:easylearning/pages/application/bloc/app_events.dart';
+import 'package:easylearning/pages/home/bloc/home_bloc.dart';
+import 'package:easylearning/pages/home/bloc/home_events.dart';
+import 'package:easylearning/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,6 +24,7 @@ AppBar buildAppBar() {
 }
 
 void removeUserData(BuildContext context) {
+  context.read<HomeBlocs>().add(const HomeDots(0));
   context.read<AppBlocs>().add(const TriggerAppEvent(0));
   Global.storageService.removeFromKey(AppConstants.STORAGE_USER_TOKEN);
   Global.storageService.removeFromKey(AppConstants.STORAGE_USER_PROFILE_KEY);
